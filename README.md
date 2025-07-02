@@ -81,7 +81,7 @@ Network isolation - Secure container networking
 🚀 To Deploy:
 Build and run:
 
-docker-compose up -d
+docker compose up -d
 Access dashboard:
 Open http://localhost:3000
 Connect to your Nukkit server (ws://your-server:19132)
