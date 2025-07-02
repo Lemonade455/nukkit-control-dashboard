@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  nukkit-dashboard:
+    build: .
+    ports:
+      - "3000:3000"  # Dashboard web interface
+      - "8080:8080"  # API server (if needed)
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./server-data:/app/server-data
+      - ./logs:/app/logs
+    networks:
+      - nukkit-network
+    restart: unless-stopped
+
+  # Optional: Nukkit server container (if you want to run Nukkit in Docker too)
+  # nukkit-server:
+  #   image: openjdk:11-jre-slim
+  #   ports:
+  #     - "19132:19132/udp"
+  #   volumes:
+  #     - ./nukkit-server:/nukkit
+  #     - ./server-data:/nukkit/worlds
+  #   working_dir: /nukkit
+  #   command: ["java", "-jar", "nukkit.jar"]
+  #   networks:
+  #     - nukkit-network
+  #   restart: unless-stopped
+
+networks:
+  nukkit-network:
+    driver: bridge
+
+volumes:
+  server-data:
+  logs:
